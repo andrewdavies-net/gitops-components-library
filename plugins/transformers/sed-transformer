@@ -1,0 +1,14 @@
+#!/bin/sh
+
+dir=$(pwd)
+input=$(cat -)
+
+# start in current dir and then go back up the dir tree looking for sed files
+while [ "$dir" != "/" ]; do
+  if [ -e "$dir/values.sed" ]; then
+    input=$(echo "$input" | sed -f "$dir/values.sed")
+  fi
+# Strip the end dir
+  dir=$(dirname $dir)
+done
+$input"

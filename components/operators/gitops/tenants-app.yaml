@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tenants-config
+  namespace: gitops
+spec:
+  project: default
+  destination:
+    name: ''
+    namespace: default
+    server: https://kubernetes.default.svc
+  sources:
+    - repoURL: https://github.com/ldesrosi/gitops-components-library.git
+      path: deploy/tenants/projects
+      targetRevision: HEAD

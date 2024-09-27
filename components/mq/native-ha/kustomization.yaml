@@ -1,0 +1,50 @@
+# ADD RESOURCES - add one or more 'resources' (files) for the build.  Files must be created and added to the path dictated.
+resources:
+- ./qm.yaml
+#- ./port.yaml
+
+# MERGE FILES INTO ONE - merge multiple files of the same name, across different sections of the YAML tree into one.
+patchesStrategicMerge:
+- ./qm.yaml
+# MERGE FILES INTO ONE end
+
+# DISABLE AUTO END SUFFIX - Removes the random alpha numeric ending to objects such as configMaps.
+generatorOptions:
+ disableNameSuffixHash: true
+# DISABLE AUTO END SUFFIX end
+
+# --- CONFIGMAP CREATOR --- create configmaps from files you've added to insert into the QMGR build/creation.
+# MQSC CONFIG - add 'static' MQSC files, whcih only take effect on inital build of the QMGR container/POD. This one creates the configmap from scratch (can be merged with others elsewhere).
+configMapGenerator:
+- name: ~qm~-mqsc-configmap
+  behavior: create
+  files:
+   - static-native-ha.mqsc
+# MQSC CONFIG end
+
+# CUSTOM QM.INI - add your own custom 'qm.ini' file
+- name: ~qm~-mqsc-ini-config
+  behavior: create
+  files:
+   - qm.ini
+# CUSTOM QM.INI end
+# --- CONFIGMAP CREATOR --- end
+
+# PATCHES - add or override resources
+patches:
+- target:
+    group: mq.ibm.com
+    kind: QueueManager
+  patch: |-
+    - op: add 
+      path: /spec/pki/keys/0/secret/secretName
+      value: ~qm~-cert
+    - op: add
+      path: /spec/pki/trust/0/secret/secretName 
+      value: ~qm~-cert
+# PATCHES end
+
+# ENABLE SED REPLACE - this points to the SED transformer and enables it at this level in the YAML tree.
+transformers:
+- finalizer.yaml
+# ENABLE SED REPLACE end

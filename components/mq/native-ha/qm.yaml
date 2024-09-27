@@ -1,0 +1,104 @@
+# QMGR YAML 'BASE' - this is the YAML which is at the base of the tree and is used by ALL deployed QMGRs, regardless of environment deployed to.
+
+# QUEUE MANAGER - api version and kind of deployment, with deployment name (QMGR name).
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: ~qm~
+#  labels:
+#    labelKey: "Proof-of-Concept"
+
+# QUEUE MANAGER - end.
+
+# LICENCE & MQ VERSION - this dictates the container image pulled automatically
+spec:
+  license:
+    accept: true
+    license: ~LICENSE~
+    use: NonProduction
+  version: ~VERSION~
+# LICENCE & MQ VERSION end
+
+# --- VOLUMES --- mounted volumes within a container with configmaps
+# CONFIGMAPS - volume mounts for configmaps
+  template:
+    pod:
+      volumes:
+        - name: config-volume-scripts
+          configMap:
+            name: ~qm~-scripts-configmap
+            defaultMode: 0777
+        - name: dynamic-config-volume-mqsc
+          configMap:
+            name: ~qm~-dynamic-mqsc-configmap
+            defaultMode: 0777
+        - name: qm-config-volume
+          configMap:
+            name: ~qm~-mqsc-ini-config
+            defaultMode: 0777
+# CONFIGMAPS end
+
+# NO MQ AUTH - disables MQ permissions within the container
+      containers:
+        - env:
+            - name: MQSNOAUT
+              value: 'yes'
+          name: qmgr
+# NO MQ AUTH end
+
+# VOLUME MOUNTS - the actual directories for the configmap files
+          volumeMounts:
+          - name: config-volume-scripts
+            mountPath: /mq-config
+            readOnly: true
+          - name: dynamic-config-volume-mqsc
+            mountPath: /dyn-mq-config-mqsc
+            readOnly: true
+          - name: qm-config-volume
+            mountPath: /ini-config
+            readOnly: true  
+# VOLUME MOUNTS end
+# --- VOLUMES --- end
+
+
+# --- QMGR TYPE --- QMGR HA type and POD recovery behaviour
+# QMGR HA type
+  queueManager:
+    name: NATIVE-HA
+    availability:
+      type: NativeHA
+# QMGR HA type end
+
+# UPDATE STRATEGY - this is essential for restarting 'native ha' PODs in order
+      updateStrategy: RollingUpdate
+# UPDATE STRATEGY end
+# --- QMGR TYPE --- end
+
+# QM.INI edit for a queue manager deployment - adds to the '/etc/mqm' location. Note: This is essential for the file to be visible to the QMGR.
+# Disabled intentionally - same qm.ini but with diff name
+#    ini:
+#      - configMap:
+#          name: ~qm~-mqsc-ini-config
+#          items:
+#             - qm.ini
+# QM.INI edit end
+
+# CERTIFICATE SECRET CREATION - creats the QMGR certificate and CA secret
+  pki:
+    keys:
+#      - name: cert
+      - name: ~qm~cert
+        secret:
+          items:
+            - tls.key
+            - tls.crt
+#          secretName: cert
+          secretName: ~qm~-cert
+    trust:
+      - name: ca
+        secret:
+          items:
+            - ca.crt
+#          secretName: cert
+          secretName: ~qm~-cert
+# CERTIFICATE SECRET CREATION end

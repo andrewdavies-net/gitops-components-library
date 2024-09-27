@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: cluster-gitops
+  namespace: gitops
+spec:
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        argocd.argoproj.io/managed-by: gitops
+    syncOptions:
+      - CreateNamespace=true
+  sourceNamespaces:
+    - '*'
+  repo:
+    replicas: 1
+  server:
+    replicas: 1
+    host: argocd.example.com

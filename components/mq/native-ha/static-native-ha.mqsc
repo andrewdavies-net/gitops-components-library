@@ -1,0 +1,24 @@
+* Use this MQSC file to apply to all queue managers.
+DEFINE QLOCAL(DEMO.Q.BOQ) REPLACE
+* Use a different dead letter queue, for undeliverable messages
+DEFINE QLOCAL('~QM~.DLQ') REPLACE
+ALTER QMGR DEADQ('~QM~.DLQ')
+DEFINE CHANNEL('~QM~.APP.SVRCONN') CHLTYPE(SVRCONN)
+
+
+* Remove CHLAUTH
+set chlauth(~QM~.APP.SVRCONN) type(ADDRESSMAP) action(REMOVEALL)
+set chlauth(SYSTEM.ADMIN.SVRCONN) type(ADDRESSMAP) action(REMOVEALL)
+set chlauth(SYSTEM.*) type(ADDRESSMAP) action(REMOVEALL)
+set chlauth(*) type(BLOCKUSER) action(REMOVEALL)
+
+ALTER QMGR CHLAUTH (DISABLED)
+REFRESH SECURITY TYPE(CONNAUTH)
+
+* Define environment specific configuration here, such as channels
+
+*The MQ Service to apply dynamic_mqsc on the fly, this need to run for any dynamic MQ objects to work - QMGR name must be updated*
+DEFINE SERVICE(APPLY_SERVICE_MQSC) CONTROL(QMGR) SERVTYPE(SERVER) STARTCMD('/mq-config/startSERVICE-mqsc.sh') STARTARG(~QM~) STOPCMD('/mq-config/startSERVICE-mqsc.sh') STOPARG('') STDOUT('') STDERR('')
+DEFINE SERVICE(APPLY_QMGR_MQSC) CONTROL(QMGR) SERVTYPE(SERVER) STARTCMD('/mq-config/startQMGR-mqsc.sh') STARTARG(~QM~) STOPCMD('/mq-config/startQMGR-mqsc.sh') STOPARG('') STDOUT('') STDERR('')
+*DEFINE CHANNEL('SNI.APP.SVRCONN') CHLTYPE(SVRCONN)
+*DEFINE CHANNEL('SNI.ADMIN06.SVRCONN') CHLTYPE(SVRCONN) TRPTYPE(TCP) DESCR('MQ Explorer Access') SSLCAUTH(OPTIONAL) SSLCIPH('TLS_RSA_WITH_AES_256_GCM_SHA384') REPLACE

@@ -1,0 +1,20 @@
+resources:
+  - ../../../../base/acm
+
+patches:
+- target:
+    kind: ApplicationSet
+    name: default-appset-name
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ibm-mq-operator-appset
+    - op: replace
+      path: /spec/template/metadata/name
+      value: ibm-mq-operator-app
+    - op: replace
+      path: /spec/template/spec/sources/0/path
+      value: components/operators/ibm-mq
+    - op: replace
+      path: /spec/template/spec/destination/namespace
+      value: openshift-operators
