@@ -13,7 +13,7 @@ spec:
         requeueAfterSeconds: 180
   template:
     metadata:
-      name: default-app-name
+      name: ibm-ace-operator-app-{{name}}
       labels:
         velero.io/exclude-from-backup: "true"
     spec:
@@ -22,9 +22,9 @@ spec:
         - repositoryType: git
           repoURL: https://github.com/ldesrosi/gitops-components-library.git
           targetRevision: master
-          path: component-path
+          path: components/operators/ibm-ace
       destination:
-        namespace: destination-namespace
+        namespace: openshift-operators
         server: "{{server}}"
       syncPolicy:
         automated:

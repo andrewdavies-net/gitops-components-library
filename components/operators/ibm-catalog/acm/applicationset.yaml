@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: ibm-mq-operator-appset
+  name: ibm-catalog-appset
   namespace: openshift-gitops
 spec:
   generators:
@@ -13,7 +13,7 @@ spec:
         requeueAfterSeconds: 180
   template:
     metadata:
-      name: ibm-mq-operator-app-{{name}}
+      name: ibm-catalog-app-{{name}}
       labels:
         velero.io/exclude-from-backup: "true"
     spec:
@@ -22,7 +22,7 @@ spec:
         - repositoryType: git
           repoURL: https://github.com/ldesrosi/gitops-components-library.git
           targetRevision: master
-          path: components/operators/ibm-mq
+          path: components/operators/ibm-catalog
       destination:
         namespace: openshift-operators
         server: "{{server}}"
