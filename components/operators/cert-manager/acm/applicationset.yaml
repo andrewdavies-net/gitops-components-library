@@ -24,7 +24,7 @@ spec:
           targetRevision: master
           path: components/operators/cert-manager
       destination:
-        namespace: openshift-operators
+        namespace: cert-manager-operator
         server: "{{server}}"
       syncPolicy:
         automated:
