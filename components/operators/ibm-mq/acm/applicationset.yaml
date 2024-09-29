@@ -21,7 +21,7 @@ spec:
       sources:
         - repositoryType: git
           repoURL: https://github.com/ldesrosi/gitops-components-library.git
-          targetRevision: main
+          targetRevision: master
           path: component-path
       destination:
         namespace: destination-namespace
