@@ -4,10 +4,10 @@ metadata:
   name: ibm-operator-catalog
   namespace: openshift-marketplace
 spec:
-  displayName: ibm-operator-catalog 
+  displayName: ibm-operator-catalog
   publisher: IBM Content
   sourceType: grpc
-  image: icr.io/cpopen/ibm-operator-catalog:latest
+  image: 'icr.io/cpopen/ibm-operator-catalog:v1.27'
   updateStrategy:
     registryPoll:
       interval: 45m

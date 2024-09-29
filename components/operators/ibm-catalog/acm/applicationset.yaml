@@ -24,7 +24,7 @@ spec:
           targetRevision: master
           path: components/operators/ibm-catalog
       destination:
-        namespace: openshift-operators
+        namespace: openshift-marketplace
         server: "{{server}}"
       syncPolicy:
         automated:
