@@ -1,12 +1,5 @@
-# ADD RESOURCES - add one or more 'resources' (files) for the build.  Files must be created and added to the path dictated.
-resources:
-- ./qm.yaml
-#- ./port.yaml
-
-# MERGE FILES INTO ONE - merge multiple files of the same name, across different sections of the YAML tree into one.
-patchesStrategicMerge:
-- ./qm.yaml
-# MERGE FILES INTO ONE end
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
 
 # DISABLE AUTO END SUFFIX - Removes the random alpha numeric ending to objects such as configMaps.
 generatorOptions:
@@ -14,8 +7,16 @@ generatorOptions:
 # DISABLE AUTO END SUFFIX end
 
 # --- CONFIGMAP CREATOR --- create configmaps from files you've added to insert into the QMGR build/creation.
-# MQSC CONFIG - add 'static' MQSC files, whcih only take effect on inital build of the QMGR container/POD. This one creates the configmap from scratch (can be merged with others elsewhere).
+# SCRIPTS CONFIG - create a configMap that holds scripts for the queue manager service.
 configMapGenerator:
+- name: ~qm~-scripts-configmap
+  behavior: create
+  files:
+  - ./scripts/startSERVICE-mqsc.sh
+  - ./scripts/stopSERVICE-mqsc.sh
+  - ./scripts/startQMGR-mqsc.sh
+  - ./scripts/stopQMGR-mqsc.sh
+# SCRIPTS CONFIG end
 - name: ~qm~-mqsc-configmap
   behavior: create
   files:
@@ -29,6 +30,18 @@ configMapGenerator:
    - qm.ini
 # CUSTOM QM.INI end
 # --- CONFIGMAP CREATOR --- end
+
+
+# ADD RESOURCES - add one or more 'resources' (files) for the build.  Files must be created and added to the path dictated.
+resources:
+- ./qm.yaml
+- ./certificate.yaml
+- ./short-route.yaml
+
+# MERGE FILES INTO ONE - merge multiple files of the same name, across different sections of the YAML tree into one.
+patchesStrategicMerge:
+- ./qm.yaml
+# MERGE FILES INTO ONE end
 
 # PATCHES - add or override resources
 patches:

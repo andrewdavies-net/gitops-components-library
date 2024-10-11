@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+#  name: cert
+  name: ~qm~-cert
+spec:
+  commonName: ~qm~
+  dnsNames:
+  - ~qm~
+  - ~qm~-ibm-mq-qm
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
+#  secretName: cert
+  secretName: ~qm~-cert
+  subject:
+    organizations:
+    - [organisation]
+

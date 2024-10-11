@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ~qm~-short-route
+  namespace: test-mq
+spec:
+  host: ~qm~.[hostname]
+  to:
+    kind: Service
+    name: ~qm~-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
