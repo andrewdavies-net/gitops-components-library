@@ -1,4 +1,0 @@
-apiVersion: transformers
-kind: sed-transformer
-metadata:
-  name: sed
