@@ -2,22 +2,4 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
 resources:
-  - ../../../../base/acm
-
-patches:
-- target:
-    kind: ApplicationSet
-    name: default-appset-name
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: keycloak-operator-appset
-    - op: replace
-      path: /spec/template/metadata/name
-      value: keycloak-operator-app
-    - op: replace
-      path: /spec/template/spec/sources/0/path
-      value: components/operators/keycloak
-    - op: replace
-      path: /spec/template/spec/destination/namespace
-      value: keycloak
+  - ./applicationset.yaml
