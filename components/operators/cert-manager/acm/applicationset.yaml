@@ -18,11 +18,10 @@ spec:
         velero.io/exclude-from-backup: "true"
     spec:
       project: default
-      sources:
-        - repositoryType: git
-          repoURL: https://github.com/ldesrosi/gitops-components-library.git
-          targetRevision: master
-          path: components/operators/cert-manager
+      source:
+        repoURL: https://github.com/ldesrosi/gitops-components-library.git
+        targetRevision: master
+        path: components/operators/cert-manager
       destination:
         namespace: cert-manager-operator
         server: "{{server}}"
