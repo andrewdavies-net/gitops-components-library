@@ -18,11 +18,10 @@ spec:
         velero.io/exclude-from-backup: "true"
     spec:
       project: default
-      sources:
-        - repositoryType: git
-          repoURL: https://github.com/ldesrosi/gitops-components-library.git
-          targetRevision: master
-          path: components/operators/kafka
+      source:
+        repoURL: https://github.com/ldesrosi/gitops-components-library.git
+        targetRevision: master
+        path: components/operators/kafka
       destination:
         namespace: openshift-operators 
         server: "{{server}}"
