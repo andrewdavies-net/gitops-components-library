@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: tenants-config
-  namespace: gitops
+  namespace: openshift-gitops
 spec:
   project: default
   destination:
