@@ -3,7 +3,5 @@ kind: Component
 
 resources:
  - ./namespace.yaml
- - ./clusterrole.yaml
  - ./operator.yaml
- - ./argocd.yaml
  - ./tenants-app.yaml
