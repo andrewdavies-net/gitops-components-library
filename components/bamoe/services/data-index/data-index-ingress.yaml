@@ -1,0 +1,25 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: data-index-ingress
+  namespace: bamoe-app
+  labels:
+    app.kubernetes.io/component: data-index
+    app.kubernetes.io/instance: data-index
+    app.kubernetes.io/name: data-index
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+spec:
+  ingressClassName: public-iks-k8s-nginx
+  rules:
+    - host: data-index.bamoe-canvas-3cd0ec11030dfa215f262137faf739f1-0000.eu-gb.containers.appdomain.cloud
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: data-index
+                port:
+                  name: http
