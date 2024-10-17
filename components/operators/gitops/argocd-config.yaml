@@ -6,6 +6,7 @@ metadata:
   finalizers:
     - argoproj.io/finalizer
 spec:
+  kustomizeBuildOptions: '--enable-alpha-plugins'
   server:
     autoscale:
       enabled: false
