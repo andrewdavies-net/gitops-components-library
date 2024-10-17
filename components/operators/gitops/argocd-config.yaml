@@ -1,7 +1,7 @@
 ﻿apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
 metadata:
-  name: openshift-gitops
+  name: custom-gitops
   namespace: openshift-gitops
   finalizers:
     - argoproj.io/finalizer
