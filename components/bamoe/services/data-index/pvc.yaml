@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: data-index-claim
 spec:
-  storageClassName: ibmc-block-bronze
   accessModes:
     - ReadWriteOnce
   resources:

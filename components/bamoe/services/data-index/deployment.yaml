@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: data-index
+  labels:
+    app: data-index
 spec:
   replicas: 1
   strategy:
@@ -14,23 +16,23 @@ spec:
       containers:
         - env:
             - name: KAFKA_BOOTSTRAP_SERVERS
-              value: kafka.bamoe-app.svc.cluster.local:9092
+              value: kafka:9092
             - name: KOGITO_DATA_INDEX_PROPS
               value: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://postgresql.bamoe-app.svc.cluster.local:5432/bamoe
+              value: jdbc:postgresql://postgresql:5432/bamoe-db
             - name: QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION
               value: update
             - name: QUARKUS_DATASOURCE_USERNAME
-              value: bamoe_poc
+              value: bamoe-services
             - name: QUARKUS_DATASOURCE_PASSWORD
-              value: password
+              valueFrom: { secretKeyRef: { name: postgres-pguser-bamoe, key: password } }
             - name: QUARKUS_HTTP_CORS_ORIGINS
               value: /.*/
             - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE
               value: PROD
             - name: KOGITO_CONSOLES_KEYCLOAK_URL
-              value: https://keycloak.bamoe-canvas-3cd0ec11030dfa215f262137faf739f1-0000.eu-gb.containers.appdomain.cloud/
+              value: https://keycloak.insert-route-value-here.com/
             - name: KOGITO_CONSOLES_KEYCLOAK_DISABLE_HEALTH_CHECK
               value: 'true'
             - name: KOGITO_CONSOLES_KEYCLOAK_UPDATE_TOKEN_VALIDITY
@@ -40,7 +42,7 @@ spec:
             - name: KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID
               value: kogito-data-index-service
           image: quay.io/kiegroup/kogito-data-index-postgresql:main
-          name: bamoe-poc-data-index
+          name: bamoe-data-index
           ports:
             - containerPort: 8080
               protocol: TCP
