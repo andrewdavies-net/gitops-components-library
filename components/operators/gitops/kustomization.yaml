@@ -4,3 +4,5 @@ kind: Component
 resources:
  - ./namespace.yaml
  - ./operator.yaml
+ - ./plugin-config-cm.yaml
+ - ./argocd-config.yaml

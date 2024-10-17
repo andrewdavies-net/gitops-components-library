@@ -87,6 +87,27 @@ spec:
       requests:
         cpu: 250m
         memory: 256Mi
+    sidecarContainers:
+      - name: cmp
+        command: [/var/run/argocd/argocd-cmp-server]
+        image: busybox
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: plugin.yaml
+            name: kustomize-plugins-cm
+    volumes:
+      - configMap:
+          name: kustomize-plugins-cm
+        name: kustomize-plugins-cm
   resourceExclusions: |
     - apiGroups:
       - tekton.dev
