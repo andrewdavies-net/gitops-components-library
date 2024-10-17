@@ -145,4 +145,3 @@ spec:
         cpu: 250m
         memory: 1Gi
     sharding: {}
-    appSync: 10
