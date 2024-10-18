@@ -91,7 +91,7 @@ spec:
     sidecarContainers:
       - name: cmp
         command: [/var/run/argocd/argocd-cmp-server]
-        image: busybox
+        image: alpine/k8s:1.29.7
         securityContext:
           runAsNonRoot: true
         volumeMounts:
