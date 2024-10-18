@@ -15,4 +15,4 @@ data:
           - sh
           - "-c"
           - |
-            KUSTOMIZE_PLUGIN_HOME=$(pwd | cut -d/ -f 1-3)/plugins kustomize build --enable-alpha-plugins
+            KUSTOMIZE_PLUGIN_HOME=$(pwd | cut -d/ -f 1-4)/plugins kustomize build --enable-alpha-plugins
