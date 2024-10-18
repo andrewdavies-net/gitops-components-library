@@ -16,3 +16,4 @@ data:
           - "-c"
           - |
             KUSTOMIZE_PLUGIN_HOME=$(pwd | cut -d/ -f 1-4)/plugins kustomize build --enable-alpha-plugins
+      preserveFileMode: true
