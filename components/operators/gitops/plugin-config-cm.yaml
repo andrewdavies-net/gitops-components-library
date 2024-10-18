@@ -15,4 +15,4 @@ data:
           - sh
           - "-c"
           - |
-            XDG_CONFIG_HOME=$(pwd | cut -d/ -f 1-3) kustomize build --enable-alpha-plugins
+            KUSTOMIZE_PLUGIN_HOME=$(pwd)/plugins kustomize build --enable-alpha-plugins
