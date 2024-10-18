@@ -11,5 +11,8 @@ data:
       name: kustomize-with-local-plugins
     spec:
       generate:
-        command: ["sh", "-c"]
-        args: ["XDG_CONFIG_HOME=$(pwd | cut -d/ -f 1-3) kustomize build --enable_alpha_plugins"]
+        command: 
+          - sh
+          - "-c"
+          - |
+            XDG_CONFIG_HOME=$(pwd | cut -d/ -f 1-3) kustomize build --enable_alpha_plugins
