@@ -5,4 +5,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
   labels:
-    argocd.argoproj.io/managed-by: gitops
+    argocd.argoproj.io/managed-by: openshift-gitops
+---
+apiVersion: v1 
+kind: Namespace 
+metadata: 
+  name: cert-manager
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    argocd.argoproj.io/managed-by: openshift-gitops
