@@ -19,7 +19,7 @@ LABEL io.openshift.expose-services=""
 # up space.
 RUN dnf -y update; rpm --restore --quiet shadow-utils; \
 dnf -y install openssl; \
-curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash; \
-
-
+curl -sLO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.5.0/kustomize_v5.5.0_linux_amd64.tar.gz"; \
+tar -xvf kustomize_v5.5.0_linux_amd64.tar.gz; \
+mv ./kustomize /usr/local/bin; \
 rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
