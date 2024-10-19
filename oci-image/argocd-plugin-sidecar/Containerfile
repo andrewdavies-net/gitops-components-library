@@ -1,0 +1,25 @@
+FROM registry.access.redhat.com/ubi9/ubi:latest
+LABEL maintainer="Red Hat, Inc."
+
+LABEL com.redhat.component="argocd-plugin-container"
+LABEL com.redhat.license_terms="https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI"
+LABEL name="rhel9/podman"
+LABEL version="9.4"
+
+LABEL License="ASL 2.0"
+
+#labels for container catalog
+LABEL summary="Container to support argocd plugin for kustomize."
+LABEL description="Image contains the required kustomize utility along with other packages leveraged by kustomize plugins."
+LABEL io.k8s.display-name="argocd-sidecar"
+LABEL io.openshift.expose-services=""
+
+# Don't include container-selinux and remove
+# directories used by yum that are just taking
+# up space.
+RUN dnf -y update; rpm --restore --quiet shadow-utils; \
+dnf -y install openssl; \
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash; \
+
+
+rm -rf /var/cache/* /var/log/dnf* /var/log/yum.*
