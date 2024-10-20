@@ -19,11 +19,11 @@ spec:
       containers:
         - env:
             - name: KAFKA_BOOTSTRAP_SERVERS
-              value: kafka:9092
+              value: bamoe-event-cluster-kafka-brokers:9092
             - name: KOGITO_DATA_INDEX_PROPS
               value: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://postgresql:5432/bamoe-db
+              value: jdbc:postgresql://bamoe-db-primary:5432/bamoe-db
             - name: QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION
               value: update
             - name: QUARKUS_DATASOURCE_USERNAME
