@@ -10,6 +10,8 @@ spec:
     type: Recreate
   template:
     metadata:
+      labels:
+        app: data-index
     spec:
       securityContext:
         fsGroup: 0
