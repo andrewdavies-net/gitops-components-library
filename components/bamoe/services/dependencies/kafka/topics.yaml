@@ -2,9 +2,9 @@ kind: KafkaTopic
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
   name: kogito-jobs-events
+  namespace: app-bamoe-services
   labels:
     strimzi.io/cluster: bamoe-event-cluster
-  namespace: bamoe-services
 spec:
   partitions: 1
   replicas: 1

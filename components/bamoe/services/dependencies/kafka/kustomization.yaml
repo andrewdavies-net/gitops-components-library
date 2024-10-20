@@ -3,4 +3,4 @@ kind: Component
 
 resources:
  - ./kafka.yaml
- - ./topcs.yaml
+ - ./topics.yaml

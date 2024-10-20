@@ -2,7 +2,7 @@ kind: Kafka
 apiVersion: kafka.strimzi.io/v1beta2
 metadata:
   name: bamoe-event-cluster
-  namespace: bamoe-services
+  namespace: app-bamoe-services
 spec:
   kafka:
     version: 3.8.0
