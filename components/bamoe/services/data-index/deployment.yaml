@@ -51,9 +51,9 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /home/kogito/data/protobufs
-              name: data-index-claim0
+              name: data-index-claim
       restartPolicy: Always
       volumes:
-        - name: data-index-claim0
+        - name: data-index-claim
           persistentVolumeClaim:
-            claimName: data-index-claim0
+            claimName: data-index-claim
