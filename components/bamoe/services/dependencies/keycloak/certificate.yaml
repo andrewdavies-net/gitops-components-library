@@ -11,6 +11,3 @@ spec:
     name: ca-issuer
     kind: ClusterIssuer
   secretName: keycloak-tls-secret
-  subject:
-    organizations:
-    - [organisation]
