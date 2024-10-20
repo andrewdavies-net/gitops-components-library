@@ -46,7 +46,7 @@ metadata:
   name: kogito-processdefinitions-events
   labels:
     strimzi.io/cluster: bamoe-event-cluster
-  namespace: bamoe-services
+  namespace: app-bamoe-services
 spec:
   partitions: 1
   replicas: 1
