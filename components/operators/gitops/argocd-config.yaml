@@ -81,6 +81,7 @@ spec:
       g, cluster-admins, role:admin
     scopes: '[groups]'
   repo:
+    mountsatoken: true
     resources:
       limits:
         cpu: '1'
