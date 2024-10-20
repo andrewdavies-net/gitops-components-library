@@ -4,6 +4,7 @@ metadata:
   name: data-index
   labels:
     app: data-index
+    middleware: bamoe
 spec:
   replicas: 1
   selector:
@@ -23,7 +24,7 @@ spec:
             - name: KOGITO_DATA_INDEX_PROPS
               value: -Dkogito.protobuf.folder=/home/kogito/data/protobufs/
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://bamoe-db-primary:5432/bamoe-db
+              valueFrom: { secretKeyRef: { name: bamoe-db-pguser-bamoe-services, key: jdbc-uri } }
             - name: QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION
               value: update
             - name: QUARKUS_DATASOURCE_USERNAME
@@ -35,7 +36,10 @@ spec:
             - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE
               value: PROD
             - name: KOGITO_CONSOLES_KEYCLOAK_URL
-              value: https://keycloak.insert-route-value-here.com/
+              valueFrom:
+                configMapKeyRef:
+                  name: bamoe-services-endpoints
+                  key: KEYCLOAK_URL
             - name: KOGITO_CONSOLES_KEYCLOAK_DISABLE_HEALTH_CHECK
               value: 'true'
             - name: KOGITO_CONSOLES_KEYCLOAK_UPDATE_TOKEN_VALIDITY

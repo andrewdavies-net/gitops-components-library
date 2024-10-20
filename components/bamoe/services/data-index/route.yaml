@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: data-index-route
+  namespace: app-bamoe-services
+  labels:
+    app.kubernetes.io/instance: data-index-app
+spec:
+  to:
+    kind: Service
+    name: data-index
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
