@@ -16,8 +16,6 @@ spec:
       labels:
         app: data-index
     spec:
-      securityContext:
-        fsGroup: 0
       containers:
         - env:
             - name: KAFKA_BOOTSTRAP_SERVERS
