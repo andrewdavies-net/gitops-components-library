@@ -9,8 +9,7 @@ spec:
   instances: 1
   db:
     vendor: postgres
-    host: 
-      valueFrom: { secretKeyRef: { name: keycloak-db-pguser-keycloak-db-user, key: host } }
+    host: keycloak-db-primary.keycloak.svc
     usernameSecret:
       name: keycloak-db-pguser-keycloak-db-user
       key: user
