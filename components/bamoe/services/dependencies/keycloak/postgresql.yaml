@@ -8,7 +8,7 @@ spec:
   users:
     - name: keycloak-db-user
       databases:
-        - keycloak-db
+        - keycloak
   instances:
     - name: instance1
       dataVolumeClaimSpec:
