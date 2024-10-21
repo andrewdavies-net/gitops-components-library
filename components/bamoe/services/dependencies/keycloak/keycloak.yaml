@@ -5,10 +5,18 @@ metadata:
   namespace: keycloak
   labels:
     app: sso
-
 spec:
   instances: 1
-  hostname:
-    hostname: example.org
+  db:
+    vendor: postgres
+    host: keycloak-db
+    usernameSecret:
+      name: keycloak-db-pguser-keycloak
+      key: username
+    passwordSecret:
+      name: keycloak-db-pguser-keycloak
+      key: password
+  ingress:
+    className: openshift-default
   http:
     tlsSecret: keycloak-tls-secret
