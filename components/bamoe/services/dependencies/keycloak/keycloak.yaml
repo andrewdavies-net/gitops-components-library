@@ -11,10 +11,10 @@ spec:
     vendor: postgres
     host: keycloak-db-primary.keycloak.svc
     usernameSecret:
-      name: keycloak-db-pguser-keycloak-db-user
+      name: keycloak-db-pguser-keycloak
       key: user
     passwordSecret:
-      name: keycloak-db-pguser-keycloak-db-user
+      name: keycloak-db-pguser-keycloak
       key: password
   ingress:
     className: openshift-default
