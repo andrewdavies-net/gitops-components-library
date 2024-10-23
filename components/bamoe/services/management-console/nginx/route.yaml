@@ -1,17 +1,17 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: management-console-route
+  name: management-console-nginx-route
   namespace: app-bamoe-services
   labels:
-    app.kubernetes.io/instance: management-console
+    app.kubernetes.io/instance: management-console-nginx
 spec:
   to:
     kind: Service
-    name: management-console
+    name: management-console-nginx
     weight: 100
   port:
-    targetPort: http
+    targetPort: https
   tls:
     termination: passthrough
   wildcardPolicy: None

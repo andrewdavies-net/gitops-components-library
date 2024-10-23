@@ -4,6 +4,7 @@ metadata:
   labels:
     app: management-console
   name: management-console
+  namespace: app-bamoe-services
 spec:
   ports:
     - name: "http"

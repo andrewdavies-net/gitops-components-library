@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx-cert
+  namespace: app-bamoe-services
+spec:
+  commonName: nginx
+  dnsNames:
+  - nginx
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
+  secretName: nginx-tls-secret
