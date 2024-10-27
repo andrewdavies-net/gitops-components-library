@@ -6,6 +6,8 @@ metadata:
   labels:
     app: sso
 spec:
+  hostname: 
+    hostname: basic.hostname.org
   instances: 1
   db:
     vendor: postgres
