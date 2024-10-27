@@ -15,6 +15,7 @@ metadata:
   namespace: keycloak
 spec: 
   channel: fast 
+  version: 23.0.5
   name: keycloak-operator 
   source: community-operators
   sourceNamespace: openshift-marketplace
