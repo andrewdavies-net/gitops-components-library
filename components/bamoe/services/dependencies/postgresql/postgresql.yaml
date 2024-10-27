@@ -1,3 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: bamoe-init-sql
+  namespace: app-bamoe-services
+data:
+  init.sql: |
+    \c bamoe-db
+    CREATE SCHEMA bamoe-services AUTHORIZATION bamoe-services;
+---
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
