@@ -21,7 +21,7 @@ spec:
         - env:
             - name: RUNTIME_TOOLS_TASK_CONSOLE_KOGITO_ENV_MODE
               value: PROD
-            - name: RUNTIME_TOOLS_TASK_CONSOLE_DATA_INDEX_ENDPOINT
+            - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: bamoe-services-endpoints
