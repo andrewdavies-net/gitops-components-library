@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - env:
-            - name: RUNTIME_TOOLS_TASK_CONSOLE_KOGITO_ENV_MODE
+            - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE
               value: PROD
             - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT
               valueFrom:
