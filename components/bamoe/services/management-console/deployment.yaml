@@ -19,13 +19,24 @@ spec:
     spec:
       containers:
         - env:
-            - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE
+            - name: RUNTIME_TOOLS_TASK_CONSOLE_KOGITO_ENV_MODE
               value: PROD
-            - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT
+            - name: RUNTIME_TOOLS_TASK_CONSOLE_DATA_INDEX_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   name: bamoe-services-endpoints
                   key: DATA_INDEX_URL
+            - name: KOGITO_CONSOLES_KEYCLOAK_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: bamoe-services-endpoints
+                  key: KEYCLOAK_URL
+            - name: KOGITO_CONSOLES_KEYCLOAK_DISABLE_HEALTH_CHECK
+              value: 'true'
+            - name: KOGITO_CONSOLES_KEYCLOAK_REALM
+              value: kogito
+            - name: KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID
+              value: kogito-mgmt-service
           image: quay.io/bamoe/management-console:9.1.0-ibm-0001
           name: bamoe-management-console
           ports:
