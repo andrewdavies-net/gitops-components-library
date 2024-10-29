@@ -18,7 +18,16 @@ spec:
         middleware: bamoe
     spec:
       containers:
-        - env:
+        - name: bamoe-management-console
+          image: quay.io/bamoe/management-console:9.1.0-ibm-0001
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
             - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_KOGITO_ENV_MODE
               value: PROD
             - name: RUNTIME_TOOLS_MANAGEMENT_CONSOLE_DATA_INDEX_ENDPOINT
@@ -37,8 +46,6 @@ spec:
               value: kogito
             - name: KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID
               value: kogito-mgmt-service
-          image: quay.io/bamoe/management-console:9.1.0-ibm-0001
-          name: bamoe-management-console
           ports:
             - containerPort: 8080
               protocol: TCP

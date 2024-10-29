@@ -22,10 +22,10 @@ spec:
           image: quay.io/kiegroup/kogito-data-index-postgresql:main
           resources:
             requests:
-              memory: "64Mi"
+              memory: "128Mi"
               cpu: "250m"
             limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "500m"
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS

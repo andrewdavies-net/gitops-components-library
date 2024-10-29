@@ -6,7 +6,7 @@ metadata:
 data:
   init.sql: |
     \c bamoe-db
-    CREATE SCHEMA bamoe-services AUTHORIZATION bamoe-services;
+    CREATE SCHEMA bamoe AUTHORIZATION bamoe;
 ---
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
@@ -16,7 +16,7 @@ metadata:
 spec:
   postgresVersion: 16
   users:
-    - name: bamoe-services
+    - name: bamoe
       databases:
         - bamoe-db
   instances:
