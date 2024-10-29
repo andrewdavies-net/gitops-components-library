@@ -18,7 +18,16 @@ spec:
         app: data-index
     spec:
       containers:
-        - env:
+        - name: bamoe-data-index
+          image: quay.io/kiegroup/kogito-data-index-postgresql:main
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: bamoe-event-cluster-kafka-brokers:9092
             - name: KOGITO_DATA_INDEX_PROPS
@@ -48,8 +57,6 @@ spec:
               value: kogito
             - name: KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID
               value: kogito-data-index-service
-          image: quay.io/kiegroup/kogito-data-index-postgresql:main
-          name: bamoe-data-index
           ports:
             - containerPort: 8080
               protocol: TCP
