@@ -32,7 +32,7 @@ spec:
             - name: QUARKUS_HTTP_CORS_ORIGINS
               value: /.*/
             - name: QUARKUS_OIDC_ENABLED
-              value: 'true'
+              value: 'false'
             - name: QUARKUS_OIDC_AUTH_SERVER_URL
               valueFrom:
                 configMapKeyRef:
