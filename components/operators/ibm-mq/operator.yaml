@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-operators 
 spec:
   name: ibm-mq
-  channel: v3.1
+  channel: 7.3-sc2
   installPlanApproval: Automatic
   source: ibm-operator-catalog
   sourceNamespace: openshift-marketplace
