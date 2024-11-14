@@ -7,5 +7,5 @@ spec:
   name: ibm-mq
   channel: 7.3-sc2
   installPlanApproval: Automatic
-  source: ibm-operator-catalog
+  source: ibmmq-operator-catalogsource
   sourceNamespace: openshift-marketplace
