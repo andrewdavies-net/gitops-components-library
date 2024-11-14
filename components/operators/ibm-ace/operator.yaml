@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-operators 
 spec:
   name: ibm-appconnect
-  channel: 12.0-sc2
+  channel: v12.0-sc2
   installPlanApproval: Automatic
-  source: ibm-operator-catalog
+  source: appconnect-operator-catalogsource
   sourceNamespace: openshift-marketplace
