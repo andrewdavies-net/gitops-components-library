@@ -19,8 +19,7 @@ spec:
     spec:
       project: default
       sources:
-        - repositoryType: git
-          repoURL: https://github.com/ldesrosi/gitops-components-library.git
+        - repoURL: https://github.com/ldesrosi/gitops-components-library.git
           targetRevision: master
           path: components/operators/ibm-ace
       destination:
