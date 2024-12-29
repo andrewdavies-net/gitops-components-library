@@ -10,7 +10,7 @@ generatorOptions:
 # SCRIPTS CONFIG - create a configMap that holds scripts for the queue manager service.
 configMapGenerator:
 - name: ~qm~-scripts-configmap
-  behavior: merge
+  behavior: create
   files:
   - ./scripts/startSERVICE-mqsc.sh
   - ./scripts/stopSERVICE-mqsc.sh
@@ -18,14 +18,14 @@ configMapGenerator:
   - ./scripts/stopQMGR-mqsc.sh
 # SCRIPTS CONFIG end
 - name: ~qm~-mqsc-configmap
-  behavior: merge
+  behavior: create
   files:
    - static-native-ha.mqsc
 # MQSC CONFIG end
 
 # CUSTOM QM.INI - add your own custom 'qm.ini' file
 - name: ~qm~-mqsc-ini-config
-  behavior: merge
+  behavior: create
   files:
    - qm.ini
 # CUSTOM QM.INI end
