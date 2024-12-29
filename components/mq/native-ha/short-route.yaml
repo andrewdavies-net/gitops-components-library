@@ -4,7 +4,7 @@ metadata:
   name: ~qm~-short-route
   namespace: test-mq
 spec:
-  host: ~qm~.[hostname]
+  host: ~qm~.~hostname~
   to:
     kind: Service
     name: ~qm~-ibm-mq
