@@ -15,5 +15,5 @@ spec:
   secretName: ~qm~-cert
   subject:
     organizations:
-    - [organisation]
+    - ~organisation~
 
