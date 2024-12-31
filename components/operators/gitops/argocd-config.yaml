@@ -125,6 +125,7 @@ spec:
       g, cluster-admins, role:admin
     scopes: '[groups]'
   repo:
+    logLevel: debug
     mountsatoken: true
     resources:
       limits:
