@@ -1,0 +1,35 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: IntegrationRuntime
+metadata:
+  name: IRFlow
+  labels:
+    backup.appconnect.ibm.com/component: integrationruntime
+spec:
+  replicas: 1
+  version: '13.0'
+  license:
+    accept: true
+    license: L-KPRV-AUG9NC
+    use: CloudPakForIntegrationNonProductionFREE
+  strategy:
+    type: RollingUpdate
+  service:
+    type: ClusterIP
+  template:
+    spec:
+      containers:
+        - resources:
+            limits:
+              cpu: 500m
+              memory: 736Mi
+              ephemeral-storage: 100Mi
+            requests:
+              cpu: 300m
+              memory: 368Mi
+              ephemeral-storage: 50Mi
+          name: runtime
+          imagePullPolicy: IfNotPresent
+  logFormat: basic
+  defaultNetworkPolicy:
+    enabled: true
+

@@ -86,19 +86,42 @@ spec:
 # CERTIFICATE SECRET CREATION - creats the QMGR certificate and CA secret
   pki:
     keys:
-#      - name: cert
       - name: ~qm~cert
         secret:
           items:
             - tls.key
             - tls.crt
-#          secretName: cert
           secretName: ~qm~-cert
     trust:
       - name: ca
         secret:
           items:
             - ca.crt
-#          secretName: cert
           secretName: ~qm~-cert
 # CERTIFICATE SECRET CREATION end
+
+# CPU and RAM Resources - configure queue manager CPU and RAM
+    logFormat: ~log-format~
+    resources:
+      requests:
+        cpu: ~cpu-min~
+        memory: ~memory-min~
+      limits:
+        cpu: ~cpu-max~
+        memory: ~memory-max~
+# CPU and RAM Resources end
+
+# STORAGE Resources - configure queue manager storage type and how much
+    storage:
+      defaultClass: ocs-external-storagecluster-ceph-rbd
+      queueManager:
+        class: ocs-external-storagecluster-ceph-rbd
+        size: ~storage-size~
+        type: persistent-claim
+# STORAGE Resources end
+
+# PLATFORM UI 'MQ Console'.  Note: This must be inserted at the end of QMGR config or it'll stop config from loading.
+  web:
+    enabled: false
+# PLATFORM UI 'MQ Console' end
+

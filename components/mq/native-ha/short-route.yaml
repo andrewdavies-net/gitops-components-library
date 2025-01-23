@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: ~qm~-short-route
 spec:
-  host: ~qm~.~hostname~
+  host: ~qm~.~domain~
   to:
     kind: Service
     name: ~qm~-ibm-mq
