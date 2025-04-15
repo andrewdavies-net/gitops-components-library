@@ -19,7 +19,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/ldesrosi/gitops-components-library.git
+        repoURL: https://github.com/andrewdavies-net/gitops-components-library.git
         targetRevision: master
         path: components/operators/keycloak
       destination:
