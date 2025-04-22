@@ -13,14 +13,9 @@ spec:
         requeueAfterSeconds: 180
   template:
     metadata:
-      annotations:
-        apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
-        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: openshift-gitops
-        argocd.argoproj.io/skip-reconcile: "true"
-      labels:
-        apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
-        velero.io/exclude-from-backup: "true"
       name: ibm-mq-operator-app-{{name}}
+      labels:
+        velero.io/exclude-from-backup: "true"
     spec:
       project: default
       sources:
@@ -32,8 +27,8 @@ spec:
         server: "{{server}}"
       syncPolicy:
         automated:
-          prune: true
           selfHeal: true
+          prune: true
         syncOptions:
-          - CreateNamespace=true
+          - CreateNamespace=false
           - PruneLast=true
