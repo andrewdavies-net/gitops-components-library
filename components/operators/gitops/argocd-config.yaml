@@ -137,7 +137,7 @@ spec:
     sidecarContainers:
       - name: cmp
         command: [/var/run/argocd/argocd-cmp-server]
-        image: quay.io/adavies2_uk/argocd-sidecar-plugin:latest
+        image: quay.io/adavies2_uk/argocd-sidecar-plugin:s390x-v1.0.0
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
