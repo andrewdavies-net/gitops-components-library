@@ -9,7 +9,7 @@ spec:
         configMapRef: acm-placement
         labelSelector:
           matchLabels:
-            cluster.open-cluster-management.io/placement: all-clusters-placement
+            cluster.open-cluster-management.io/placement: z-clusters-placement
         requeueAfterSeconds: 180
   template:
     metadata:
@@ -44,7 +44,7 @@ spec:
         configMapRef: acm-placement
         labelSelector:
           matchLabels:
-            cluster.open-cluster-management.io/placement: all-clusters-placement
+            cluster.open-cluster-management.io/placement: z-clusters-placement
         requeueAfterSeconds: 180
   template:
     metadata:
