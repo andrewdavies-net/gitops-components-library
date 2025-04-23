@@ -15,7 +15,7 @@ spec:
   license:
     accept: true
     license: ~LICENSE~
-    use: Development
+    use: NonProduction
   version: ~VERSION~
 # LICENCE & MQ VERSION end
 
