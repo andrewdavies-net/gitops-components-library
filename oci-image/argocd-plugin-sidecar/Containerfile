@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi9/ubi:latest
 LABEL maintainer="Red Hat, Inc."
-
+ARG ARCH
 LABEL com.redhat.component="argocd-plugin-container"
 LABEL com.redhat.license_terms="https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI"
 LABEL name="rhel9/podman"
@@ -20,12 +20,12 @@ LABEL io.openshift.expose-services=""
 RUN dnf -y update; rpm --restore --quiet shadow-utils; \
 dnf -y install openssl; \
 dnf -y install git; \
-curl -sLO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.5.0/kustomize_v5.5.0_linux_amd64.tar.gz"; \
-tar -xvf kustomize_v5.5.0_linux_amd64.tar.gz; \
+curl -sLO "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.5.0/kustomize_v5.5.0_linux_${ARCH}.tar.gz"; \
+tar -xvf kustomize_v5.5.0_linux_${ARCH}.tar.gz; \
 mv ./kustomize /usr/local/bin; \
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl; \
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/${ARCH}/kubectl; \
 chmod +x ./kubectl; \
 mv ./kubectl /usr/local/bin; \
-rm -rf /var/cache/* /var/log/dnf* /var/log/yum.* kustomize_v5.5.0_linux_amd64.tar.gz
+rm -rf /var/cache/* /var/log/dnf* /var/log/yum.* kustomize_v5.5.0_linux_${ARCH}.tar.gz
 
-RUN git
+# RUN git
