@@ -4,3 +4,4 @@ kind: Component
 resources:
  - ./namespace.yaml
  - ./operator.yaml
+ - ./ca-cert.yaml
