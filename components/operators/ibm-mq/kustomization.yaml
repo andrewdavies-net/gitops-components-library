@@ -2,5 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
 resources:
- - https://raw.githubusercontent.com/IBM/cloud-pak/master/repo/case/ibm-mq/3.2.6/OLM/catalog-sources.yaml
+ - https://raw.githubusercontent.com/IBM/cloud-pak/master/repo/case/ibm-mq/3.5.1/OLM/catalog-sources.yaml
  - ./operator.yaml
