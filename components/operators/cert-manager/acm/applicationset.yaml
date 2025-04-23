@@ -14,7 +14,12 @@ spec:
   template:
     metadata:
       name: cert-operator-app-{{name}}
+      annotations:
+        apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
+        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: openshift-gitops
+        argocd.argoproj.io/skip-reconcile: "true"
       labels:
+        apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
         velero.io/exclude-from-backup: "true"
     spec:
       project: default
@@ -46,10 +51,17 @@ spec:
           matchLabels:
             cluster.open-cluster-management.io/placement: z-clusters-placement
         requeueAfterSeconds: 180
+
+  # a default ca is created that depends on cert manager crd to be present, for now use seperate deployment but there is likely a smarter way to pre pull the crds
   template:
     metadata:
       name: cert-operator-app-ca-{{name}}
+      annotations:
+        apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
+        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: openshift-gitops
+        argocd.argoproj.io/skip-reconcile: "true"
       labels:
+        apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
         velero.io/exclude-from-backup: "true"
     spec:
       project: default

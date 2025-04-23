@@ -14,7 +14,12 @@ spec:
   template:
     metadata:
       name: ibm-ace-operator-app-{{name}}
+      annotations:
+        apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
+        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: openshift-gitops
+        argocd.argoproj.io/skip-reconcile: "true"
       labels:
+        apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
         velero.io/exclude-from-backup: "true"
     spec:
       project: default
