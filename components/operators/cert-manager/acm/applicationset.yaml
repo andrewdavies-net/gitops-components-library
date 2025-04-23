@@ -37,45 +37,45 @@ spec:
         syncOptions:
           - CreateNamespace=false
           - PruneLast=true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: ApplicationSet
-# metadata:
-#   name: cert-operator-ca
-#   namespace: openshift-gitops
-# spec:
-#   generators:
-#     - clusterDecisionResource:
-#         configMapRef: acm-placement
-#         labelSelector:
-#           matchLabels:
-#             cluster.open-cluster-management.io/placement: z-clusters-placement
-#         requeueAfterSeconds: 180
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-operator-ca
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: z-clusters-placement
+        requeueAfterSeconds: 180
 
-#   # a default ca is created that depends on cert manager crd to be present, for now use seperate deployment but there is likely a smarter way to pre pull the crds
-#   template:
-#     metadata:
-#       name: cert-operator-app-ca-{{name}}
-#       annotations:
-#         apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
-#         apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: openshift-gitops
-#         argocd.argoproj.io/skip-reconcile: "true"
-#       labels:
-#         apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
-#         velero.io/exclude-from-backup: "true"
-#     spec:
-#       project: default
-#       source:
-#         repoURL: https://github.com/andrewdavies-net/gitops-components-library.git
-#         targetRevision: master
-#         path: components/operators/cert-manager/certificates
-#       destination:
-#         namespace: cert-manager-operator
-#         server: "{{server}}"
-#       syncPolicy:
-#         automated:
-#           selfHeal: true
-#           prune: true
-#         syncOptions:
-#           - CreateNamespace=false
-#           - PruneLast=true
+  # a default ca is created that depends on cert manager crd to be present, for now use seperate deployment but there is likely a smarter way to pre pull the crds
+  template:
+    metadata:
+      name: cert-operator-app-ca-{{name}}
+      annotations:
+        apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
+        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: openshift-gitops
+        argocd.argoproj.io/skip-reconcile: "true"
+      labels:
+        apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
+        velero.io/exclude-from-backup: "true"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/andrewdavies-net/gitops-components-library.git
+        targetRevision: master
+        path: components/operators/cert-manager/certificates
+      destination:
+        namespace: cert-manager-operator
+        server: "{{server}}"
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=false
+          - PruneLast=true
