@@ -7,11 +7,11 @@ spec:
   generators:
     - clusterDecisionResource:
         configMapRef: acm-placement
-        labelSelector:all
+        labelSelector:
           matchLabels:
             cluster.open-cluster-management.io/placement: z-clusters-placement
         requeueAfterSeconds: 180
-  # must be push as it installs gitops onto the remote clusters
+        # must be push as it installs gitops onto the remote clusters
   template:
     metadata:
       name: gitops-operator-app-{{name}}
