@@ -39,7 +39,7 @@ resources:
 - ./short-route.yaml
 
 # MERGE FILES INTO ONE - merge multiple files of the same name, across different sections of the YAML tree into one.
-patchesStrategicMerge:
+patches:
 - ./qm.yaml
 # MERGE FILES INTO ONE end
 
