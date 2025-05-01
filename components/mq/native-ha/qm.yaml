@@ -6,7 +6,7 @@ kind: QueueManager
 metadata:
   name: ~qm~
   annotations:
-   # stop heatlhcheck for STS and pods as it will never complete in argo due to MQ active/running nature
+   # stop heatlhcheck for STS and pods as it will never complete in argo due to MQ active/running nature (todo workout if this worked)
     argocd.argoproj.io/ignore-healthcheck: true
 #  labels:
 #    labelKey: "Proof-of-Concept"
