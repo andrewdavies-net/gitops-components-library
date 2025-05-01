@@ -36,7 +36,7 @@ configMapGenerator:
 resources:
 - ./qm.yaml
 - ./certificate.yaml
-- ./short-route.yaml
+# - ./short-route.yaml
 
 # MERGE FILES INTO ONE - merge multiple files of the same name, across different sections of the YAML tree into one.
 patches:
