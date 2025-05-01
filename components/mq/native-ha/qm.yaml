@@ -46,6 +46,17 @@ spec:
         - env:
             - name: MQSNOAUT
               value: 'yes'
+# when using webui give password              
+            - name: MQ_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-mq-dev-passwords
+                  key: dev-admin-password
+            - name: MQ_APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-mq-dev-passwords
+                  key: dev-app-password
           name: qmgr
 # NO MQ AUTH end
 
