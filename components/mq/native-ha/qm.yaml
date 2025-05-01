@@ -46,17 +46,6 @@ spec:
         - env:
             - name: MQSNOAUT
               value: 'yes'
-# when using webui give password              
-            - name: MQ_ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: my-mq-dev-passwords
-                  key: dev-admin-password
-            - name: MQ_APP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: my-mq-dev-passwords
-                  key: dev-app-password
           name: qmgr
 # NO MQ AUTH end
 
@@ -135,7 +124,17 @@ spec:
 # STORAGE Resources end
 
 # PLATFORM UI 'MQ Console'.  Note: This must be inserted at the end of QMGR config or it'll stop config from loading.
+# This is currently enabled with static config for all MQ instances as part of the base, this likely needs to move up the tree a bit 
+
   web:
-    enabled: false
+    enabled: true
+    console:
+      authentication:
+        provider: manual
+      authorization:
+        provider: manual
+    manualConfig:
+      configMap:
+        name: mqwebuserconfigmap
 # PLATFORM UI 'MQ Console' end
 
