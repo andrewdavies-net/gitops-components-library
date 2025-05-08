@@ -109,9 +109,9 @@ spec:
       requests:
         cpu: ~cpu-min~
         memory: ~memory-min~
-      limits:
-        cpu: ~cpu-max~
-        memory: ~memory-max~
+      # limits:
+      #   cpu: ~cpu-max~
+      #   memory: ~memory-max~
 # CPU and RAM Resources end
 
 # STORAGE Resources - configure queue manager storage type and how much
