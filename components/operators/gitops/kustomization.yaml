@@ -6,4 +6,4 @@ resources:
  - ./operator.yaml
  - ./plugin-config-cm.yaml
  - ./argocd-config.yaml
-#  - ./clusterrole.yaml
+ - ./clusterrole.yaml
