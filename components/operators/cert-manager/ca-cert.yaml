@@ -1,30 +1,42 @@
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: selfsigned-issuer
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-spec:
-  selfSigned: {}
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
+kind: Secret
+apiVersion: v1
 metadata:
-  name: root-ca
-  namespace: cert-manager
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-spec:
-  isCA: true
-  commonName: root-ca
-  secretName: root-ca-secret
-  privateKey:
-    algorithm: ECDSA
-    size: 256
-  issuerRef:
-    name: selfsigned-issuer
-    kind: ClusterIssuer
-    group: cert-manager.io
+  name: root-ca-secret
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJaVENDQVF1Z0F3SUJBZ0lSQVBBZU5JZzlQbkdoTXdvSFpsb2gyYUV3Q2dZSUtvWkl6ajBFQXdJd0VqRVEKTUE0R0ExVUVBeE1IY205dmRDMWpZVEFlRncweU5UQTBNak14TURFeE5UbGFGdzB5TlRBM01qSXhNREV4TlRsYQpNQkl4RURBT0JnTlZCQU1UQjNKdmIzUXRZMkV3V1RBVEJnY3Foa2pPUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVFlCmUvdlIycHdVNE11S0FMNUowTkJ4OFJjSVlGZ0NPOFdBWnRQRnJUZjFwU1hsSU16MThYVTJFNG1idUpYWjNQSmsKN2xYNEYxM0Z5WXorc2tGUml3dDRvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVWNqcUpNUVFzdlBWQ3N0aG5rSW0zOVM0MHlOd3dDZ1lJS29aSXpqMEVBd0lEClNBQXdSUUloQU5pOWt2eWZLQUNWeHhwbnhvQURicXdpSi9tWGl3MXRaQ1hxUGlBcDJKZVlBaUJVUW50R3dWQnYKaERoMWFiS09seWxQM3ZzblNMWllnWEwwenRQb21la1QvQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJaVENDQVF1Z0F3SUJBZ0lSQVBBZU5JZzlQbkdoTXdvSFpsb2gyYUV3Q2dZSUtvWkl6ajBFQXdJd0VqRVEKTUE0R0ExVUVBeE1IY205dmRDMWpZVEFlRncweU5UQTBNak14TURFeE5UbGFGdzB5TlRBM01qSXhNREV4TlRsYQpNQkl4RURBT0JnTlZCQU1UQjNKdmIzUXRZMkV3V1RBVEJnY3Foa2pPUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVFlCmUvdlIycHdVNE11S0FMNUowTkJ4OFJjSVlGZ0NPOFdBWnRQRnJUZjFwU1hsSU16MThYVTJFNG1idUpYWjNQSmsKN2xYNEYxM0Z5WXorc2tGUml3dDRvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3RHdZRFZSMFRBUUgvQkFVdwpBd0VCL3pBZEJnTlZIUTRFRmdRVWNqcUpNUVFzdlBWQ3N0aG5rSW0zOVM0MHlOd3dDZ1lJS29aSXpqMEVBd0lEClNBQXdSUUloQU5pOWt2eWZLQUNWeHhwbnhvQURicXdpSi9tWGl3MXRaQ1hxUGlBcDJKZVlBaUJVUW50R3dWQnYKaERoMWFiS09seWxQM3ZzblNMWllnWEwwenRQb21la1QvQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSVA3U045aTJNZ29YNEtoQUgwTWkyMkZIVis5bjZzM1hBcWN2M1Zpeko0N3hvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFSG52NzBkcWNGT0RMaWdDK1NkRFFjZkVYQ0dCWUFqdkZnR2JUeGEwMzlhVWw1U0RNOWZGMQpOaE9KbTdpVjJkenlaTzVWK0JkZHhjbU0vckpCVVlzTGVBPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=
+type: kubernetes.io/tls
+# Original config created on a per cluster basis, now providing up front to allow single CA across both clusters
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: selfsigned-issuer
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "2"
+# spec:
+#   selfSigned: {}
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: root-ca
+#   namespace: cert-manager
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "2"
+# spec:
+#   isCA: true
+#   commonName: root-ca
+#   secretName: root-ca-secret
+#   privateKey:
+#     algorithm: ECDSA
+#     size: 256
+#   issuerRef:
+#     name: selfsigned-issuer
+#     kind: ClusterIssuer
+#     group: cert-manager.io
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
