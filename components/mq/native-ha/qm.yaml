@@ -86,7 +86,7 @@ spec:
 #             - qm.ini
 # QM.INI edit end
 
-# CERTIFICATE SECRET CREATION - creats the QMGR certificate and CA secret
+# CERTIFICATE SECRET CREATION - creats the QMGR certificate and CA secret NOTE YOU NEED to provide the ca.crt in the items list for the QM itself needs full chain
   pki:
     keys:
       - name: ~qm~cert
@@ -94,6 +94,7 @@ spec:
           items:
             - tls.key
             - tls.crt
+            - ca.crt
           secretName: ~qm~-cert
     trust:
       - name: ca
