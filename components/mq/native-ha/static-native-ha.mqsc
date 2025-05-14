@@ -3,11 +3,13 @@ DEFINE QLOCAL(DEMO.Q.BOQ) REPLACE
 * Use a different dead letter queue, for undeliverable messages
 DEFINE QLOCAL('~QM~.DLQ') REPLACE
 ALTER QMGR DEADQ('~QM~.DLQ')
-DEFINE CHANNEL('~QM~.APP.SVRCONN') CHLTYPE(SVRCONN)
+
+* used for the app queue channel should be the same across each MQ device
+DEFINE CHANNEL('APP.APP.SVRCONN') CHLTYPE(SVRCONN) SSLCAUTH(REQUIRED) SSLCIPH('TLS_RSA_WITH_AES_256_GCM_SHA384')
 
 
 * Remove CHLAUTH
-set chlauth(~QM~.APP.SVRCONN) type(ADDRESSMAP) action(REMOVEALL)
+set chlauth(APP.APP.SVRCONN) type(ADDRESSMAP) action(REMOVEALL)
 set chlauth(SYSTEM.ADMIN.SVRCONN) type(ADDRESSMAP) action(REMOVEALL)
 set chlauth(SYSTEM.*) type(ADDRESSMAP) action(REMOVEALL)
 set chlauth(*) type(BLOCKUSER) action(REMOVEALL)
